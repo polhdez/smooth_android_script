@@ -17,10 +17,11 @@ msg() {
 
 install() {
     msg "Compiling apps as $MODE mode"
-    adb shell cmd package compile -a -f -m "$MODE"
+    adb shell pm compile -a -f -m "$MODE"
+	adb shell pm compile -a -f compile-layouts
 
     msg "Running the dexopt job to optimize dex"
-    adb shell cmd package bg-dexopt-job
+    adb shell pm bg-dexopt-job
 
     msg "Setting up animations as $ANIMATION for smoothness"
     adb shell settings put global window_animation_scale $ANIMATION
